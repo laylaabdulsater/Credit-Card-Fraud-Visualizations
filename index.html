@@ -21,6 +21,9 @@
   integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
   crossorigin=""/>
 
+  <!-- SweetAlert CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.min.css" rel="stylesheet">
+
   <!-- Our CSS -->
   <link rel="stylesheet" type="text/css" href="static/css/style.css">
 </head>
@@ -38,7 +41,14 @@
       <div class="col-md-2">
         <div class="well">
           <h5>Dropdown Menu:</h5>
-          <select id="selDataset" onchange="optionChanged(this.value)"></select>
+          <select id="selDataset" onchange="optionChanged(this.value)">
+            <option value="" disabled selected>Select an option</option>
+            <option value="option1">Fraud Density Map</option>
+            <option value="option2">Map 2</option>
+            <option value="option3">Map 3</option>
+            <option value="option3">Map 4</option>
+            <option value="option3">Map 5</option>
+          </select>
         </div>
         <div class="panel panel-primary">
           <div class="panel-heading">
@@ -61,11 +71,12 @@
     </div>
   </div>
 
-
+  <!-- SweetAler JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js"></script>
 
   <!-- Our JavaScript file -->
   <script src="static/js/app.js"></script>
-
+  <div id="map"></div>
 </body>
 
 </html>

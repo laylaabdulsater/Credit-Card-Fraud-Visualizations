@@ -2,7 +2,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Code to execute when DOM is ready
 
     // Load the data from CSC file
-    d3.csv('static/data/creditcardfraud.csv').then(data => {
+
+    d3.csv('Fraud_address.csv').then(data => {
+
         // Process the data
 
         // Create the dropdown menu
@@ -21,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         function optionChanged () {
             let selectedOption = dropdown.property("value")
 
-            let filteredData = data.filter(d => d.first === selectedOption);
+            let filteredData = data.filter(d => d.category === selectedOption);
 
             // General Info Panel
             let panelBody = d3.select("#sample-metadata");
@@ -40,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             //First chart
             let trace1 = {
-                x: filteredData.map(d => d.trans_date_trans_time),
+                x: filteredData.map(d => d.gender),
                 y: filteredData.map(d => d.amt),
                 type: "bar"
             };
@@ -49,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let layout1 = {
                 title: `Transactions for ${selectedOption}`,
-                xaxis: { title: "Transaction Date" },
+                xaxis: { title: "Transaction by Gender" },
                 yaxis: { title: "Amount" }
             };
 
@@ -58,8 +60,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             //Second chart
             let trace2 = {
-                x: filteredData.map(d => d.trans_date_trans_time),
-                y: filteredData.map(d => d.city_pop),
+                x: filteredData.map(d => d.state),
+                y: filteredData.map(d => d.amt),
                 type: "line"
             };
         
@@ -67,8 +69,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let layout2 = {
                 title: `City Population for ${selectedOption}`,
-                xaxis: { title: "Transaction Date" },
-                yaxis: { title: "City Population" }
+                xaxis: { title: "Transaction by State" },
+                yaxis: { title: "Amount" }
             };
 
             // Create the chart
@@ -76,8 +78,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             //Third chart
             let trace3 = {
-                x: filteredData.map(d => d.trans_date_trans_time),
-                y: filteredData.map(d => d.is_fraud),
+                x: filteredData.map(d => d.job),
+                y: filteredData.map(d => d.amt),
                 type: "scatter",
                 mode: "markers"
             };
@@ -86,16 +88,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let layout3 = {
                 title: `Fraudulent Transactions for ${selectedOption}`,
-                xaxis: { title: "Transaction Date" },
-                yaxis: { title: "Is Fraudulent" }
+                xaxis: { title: "Transaction by Job" },
+                yaxis: { title: "Amount" }
             };
 
             // Create the chart
             Plotly.newPlot("chart3", data3, layout3)
-        }
+        
 
         //Display the plot
         optionChanged();
+
+        }
 
     }).catch(error => console.log("Error fetching data:", error));
 
