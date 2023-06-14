@@ -54,9 +54,23 @@ CREATE TABLE "fraud_merch" (
 ALTER TABLE "public_hidden_people" ADD CONSTRAINT "fk_public_hidden_people_first_last" FOREIGN KEY("first", "last")
 REFERENCES "fraud_personal" ("first", "last");
 
+<<<<<<< HEAD
+ALTER TABLE "public_hidden_people" ADD CONSTRAINT "fk_public_hidden_people_merchant" FOREIGN KEY("merchant")
+REFERENCES "fraud_merch" ("merchant");
+
+ALTER TABLE "public_hidden_people" ADD CONSTRAINT "fk_public_hidden_people_city" FOREIGN KEY("city")
+REFERENCES "fraud_address" ("city");
+
+ALTER TABLE "fraud_address" ADD CONSTRAINT "fk_fraud_address_first_last" FOREIGN KEY("first", "last")
+REFERENCES "fraud_personal" ("first", "last");
+
+ALTER TABLE "fraud_merch" ADD CONSTRAINT "fk_fraud_merch_first_last" FOREIGN KEY("first", "last")
+REFERENCES "fraud_personal" ("first", "last");
+=======
 ALTER TABLE "fraud_address" ADD CONSTRAINT "fk_fraud_address_city" FOREIGN KEY("city")
 REFERENCES "public_hidden_people" ("city");
 
 ALTER TABLE "fraud_merch" ADD CONSTRAINT "fk_fraud_merch_merchant" FOREIGN KEY("merchant")
 REFERENCES "public_hidden_people" ("merchant");
+>>>>>>> main
 

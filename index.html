@@ -4,6 +4,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
+  <title>Fraud Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.1/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.1/MarkerCluster.Default.css" />
+  <style>
+    #map {
+      height: 500px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="row">
+    <div class="col-md-12 jumbotron text-center">
+      <h1>Credit Card Fraud Dashboard</h1>
+      <p>Use the interactive charts below to explore the dataset</p>
+=======
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Credit Card Fraud</title>
 
@@ -62,13 +80,33 @@
       <div class="col-md-12">
         <div id="chart3"></div>
       </div>
+>>>>>>> main
     </div>
   </div>
+  <div class="well">
+    <h5>Dropdown Menu:</h5>
 
+<<<<<<< HEAD
+    <select id="selDataset" onchange="optionChanged(this.value)">
+      <option value="" disabled selected>Select an option</option>
+      <option value="option1">Fraud Density Map</option>
+      <option value="option2">Map 2</option>
+      <option value="option3">Map 3</option>
+      <option value="option3">Map 4</option>
+      <option value="option3">Map 5</option>
+    </select>
+  </div>
+  <<div id="map" style="width: 1200px; height: 700px;"></div>
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.1/leaflet.markercluster.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+=======
   <!-- SweetAler JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.11/dist/sweetalert2.all.min.js"></script>
 
   <!-- Our JavaScript file -->
+>>>>>>> main
   <script src="static/js/app.js"></script>
 
 </body>
