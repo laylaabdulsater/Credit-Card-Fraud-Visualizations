@@ -17,19 +17,19 @@ def api_fraud_address():
     print(keys)
     return jsonify(output_data)
 
-# @app.route("/api/fraud_personal")
-# def api_fraud_address():
+@app.route("/api/fraud_personal")
+def api_fraud_personal():
 
-#     df = pd.read_csv('Fraud_Personal.csv')
-#     output_data = df.to_dict()
-#     return jsonify(output_data)
+    df = pd.read_csv('Fraud_Personal.csv')
+    output_data = df.to_dict()
+    return jsonify(output_data)
    
-# @app.route("/api/gategory")
-# def api_fraud_address():
+@app.route("/api/Fraud_Merch")
+def api_Fraud_Merch():
 
-#     df = pd.read_csv('category.csv')
-#     output_data = df.to_dict()
-#     return jsonify(output_data)
+    df = pd.read_csv('Fraud_Merch.csv')
+    output_data = df.to_dict()
+    return jsonify(output_data)
 
 if __name__ == "__main__":
     app.run()
