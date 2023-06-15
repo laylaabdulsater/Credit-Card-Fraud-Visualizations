@@ -13,6 +13,8 @@ def api_fraud_address():
 
     df = pd.read_csv('Fraud_address.csv')
     output_data = df.to_dict()
+    keys = output_data.keys()
+    print(keys)
     return jsonify(output_data)
 
 # @app.route("/api/fraud_personal")
