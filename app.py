@@ -24,12 +24,14 @@ def api_fraud_personal():
     output_data = df.to_dict()
     return jsonify(output_data)
    
-@app.route("/api/fraud_merch")
-def api_fraud_merch():
+@app.route("/api/Fraud_Merch")
+def api_Fraud_Merch():
 
     df = pd.read_csv('Fraud_Merch.csv')
-    output_data = df.to_dict()
-    return jsonify(output_data)
+    sample_df = df.sample(n=10000) #sample of 1000 values from the Data Frame
+    category_totals = sample_df.groupby('category')['amt'].sum().reset_index()
+    output_merchdata = category_totals.to_dict(orient="records")
+    return jsonify(output_merchdata)
 
 if __name__ == "__main__":
     app.run()
