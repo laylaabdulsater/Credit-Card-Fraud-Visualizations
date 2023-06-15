@@ -20,10 +20,10 @@ function displayFraudDensityMap() {
   initializeMap();
 
   // Define the CSV file path
-  let csvFilePath = 'Fraud_address.csv';
+  let fraudAddressURL = '/api/fraud_address';
 
   // Load the CSV file using d3 and parse the data
-  d3.csv(csvFilePath).then(function(data) {
+  d3.json(fraudAddressURL).then(function(data) {
     // Create a new marker cluster group
     let markers = L.markerClusterGroup();
 
