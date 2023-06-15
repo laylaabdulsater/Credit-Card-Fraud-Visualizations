@@ -122,6 +122,7 @@ let fraudPersonalURL = '/api/fraud_personal';
   fetch(fraudPersonalURL)
     .then(response => response.json()) //Parse the repsonse to Json
     .then(apiData => {
+      console.log(apiData)
       // Parse the CSV data using Papa Parse
       const ctx = document.getElementById('genderChart').getContext('2d');
 
@@ -173,18 +174,22 @@ function optionChanged(selectedOption) {
     // Display Fraud Density Map
     document.getElementById("map").style.display = "block"; // Show the map
     document.getElementById("chart-container").style.display = "none"; // Hide the chart
+    document.getElementById("genderChart").style.display = "none";
     displayFraudDensityMap();
   } else if (selectedOption === "option2") {
     document.getElementById("map").style.display="none"; //Hide the map
     document.getElementById("chart-container").style.display = "block"; //Show the chart
+    document.getElementById("genderChart").style.display = "none";
     displayPieChart();
   } else if (selectedOption === "option3") {
     document.getElementById("map").style.display="none"; //Hide the map
     document.getElementById("chart-container").style.display = "none"; //Show the chart
+    document.getElementById("genderChart").style.display = "block";
     displayGenderChart();
   } else {
     // Hide the map for other options
     document.getElementById("map").style.display = "none";
-    document.getElementById("genderChart").style.display = "block"; 
+    document.getElementById("chart-container").style.display = "none"; 
+    document.getElementById("genderChart").style.display = "none";
   }
 }
