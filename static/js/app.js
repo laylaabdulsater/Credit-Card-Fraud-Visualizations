@@ -111,10 +111,59 @@ function displayPieChart(){
       .attr("y", 9)
       .attr("dy", "0.35em")
       .text(d=> d.category);    
-
-
     }).catch(error => console.log("Error loading the Pie chart:", error));
 }
+
+// Create Bar Chart
+function displayGenderChart(){
+let fraudPersonalURL = '/api/fraud_personal';
+
+  // Load the JSON data using d3
+  d3.json(fraudPersonalURL).then(function(data) {
+  // Get the canvas element
+  const ctx = document.getElementById('genderChart').getContext('2d');
+  // Fetch the CSV file
+  fetch('Fraud_Personal.csv')
+    .then(response => response.text())
+    .then(csvData => {
+      // Parse the CSV data using Papa Parse
+      const parsedData = Papa.parse(csvData, { header: true }).data;
+      // Extract male and female data
+      let maleCount = 0;
+      let femaleCount = 0;
+      parsedData.forEach(row => {
+        if (row.gender === 'M') {
+          maleCount++;
+        } else if (row.gender === 'F') {
+          femaleCount++;
+        }
+      });
+      // Define the data for the bar chart
+      const data = {
+        labels: ['M', 'F'],
+        datasets: [{
+          label: 'Number of People',
+          data: [maleCount, femaleCount],
+          backgroundColor: ['blue', 'pink'],
+          borderWidth: 1
+        }]
+      };
+      // Create the bar chart
+      const genderChart = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: Math.max(maleCount, femaleCount) // Adjust the maximum value if needed
+            }
+          }
+        }
+      });
+    })
+    .catch(error => console.error('Error fetching CSV file:', error));
+})};
 
 // Function to handle dropdown menu selection change event
 function optionChanged(selectedOption) {
