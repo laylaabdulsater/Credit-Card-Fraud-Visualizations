@@ -164,6 +164,29 @@ let fraudPersonalURL = '/api/fraud_personal';
     .catch(error => console.error('Error fetching API data:', error));
 }
 
+let timerInterval;
+Swal.fire({
+  title: 'Welcome to our Dashboard!',
+  html: 'I will autoclose in <b></b> milliseconds.',
+  timer: 4000,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading()
+    const b = Swal.getHtmlContainer().querySelector('b')
+    timerInterval = setInterval(() => {
+      b.textContent = Swal.getTimerLeft()
+    }, 100)
+  },
+  willClose: () => {
+    clearInterval(timerInterval)
+  }
+}).then((result) => {
+  /* Read more about handling dismissals below */
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log('I was closed by the timer')
+  }
+})
+
 // Function to handle dropdown menu selection change event
 function optionChanged(selectedOption) {
   if (selectedOption === "option1") {
