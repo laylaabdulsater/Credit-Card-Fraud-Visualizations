@@ -21,7 +21,9 @@ def api_fraud_address():
 def api_fraud_personal():
 
     df = pd.read_csv('Fraud_Personal.csv')
-    output_personal = df.to_dict()
+    sample_perosnaldf = df.sample(n=10000)
+    personal_totals = sample_perosnaldf['gender']
+    output_personal = personal_totals.tolist()
     return jsonify(output_personal)
    
 @app.route("/api/Fraud_Merch")
