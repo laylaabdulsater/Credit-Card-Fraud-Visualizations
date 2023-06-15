@@ -1,5 +1,7 @@
 // Creating the map object
 let myMap;
+// Creating the marker cluster group
+let markers = L.markerClusterGroup();
 
 // Function to initialize the map
 function initializeMap() {
@@ -16,41 +18,56 @@ function initializeMap() {
 
 // Function to display the fraud density map
 function displayFraudDensityMap() {
-  // Initialize the map
-  initializeMap();
-
-  // Define the CSV file path
+  // Define the JSON URL
   let fraudAddressURL = '/api/fraud_address';
 
-  // Load the CSV file using d3 and parse the data
+  // Load the JSON data using d3
   d3.json(fraudAddressURL).then(function(data) {
-    // Create a new marker cluster group
-    let markers = L.markerClusterGroup();
+    console.log(data); // Log the data to the console
 
-    // Loop through the data and add markers to the marker cluster group
-    data.forEach(d => {
-      let lat = parseFloat(d.lat);
-      let lng = parseFloat(d.long);
+    Object.keys(data).forEach(key => {
+      let lat = parseFloat(data[key]['lat']);
+      let lng = parseFloat(data[key]['long']);
 
       if (!isNaN(lat) && !isNaN(lng)) {
-        // Create a circle marker for each data point
-        let marker = L.circleMarker([lat, lng], {
-          radius: 5, // Adjust the radius as needed
-          fillOpacity: 0.6
-        });
-
+        // Create a marker for each data point
+        let marker = L.marker([lat, lng]);
+      
+        // Add the marker to the marker cluster group
         markers.addLayer(marker);
       }
     });
 
-    // Add our marker cluster layer to the map
+    // Add the marker cluster group to the map
     myMap.addLayer(markers);
-  }).catch(error => console.log("Error loading CSV file:", error));
+  }).catch(error => console.log("Error loading JSON data:", error));
 }
 
 // Function to handle dropdown menu selection change event
 function optionChanged(selectedOption) {
   if (selectedOption === "option1") {
+    // Initialize the map if it's not already initialized
+    if (!myMap) {
+      initializeMap();
+    }
+
+    // Display Fraud Density Map
+    document.getElementById("map").style.display = "block"; // Show the map
+    displayFraudDensityMap();
+  } else {
+    // Hide the map for other options
+    document.getElementById("map").style.display = "none";
+  }
+}
+
+// Function to handle dropdown menu selection change event
+function optionChanged(selectedOption) {
+  if (selectedOption === "option1") {
+    // Initialize the map if it's not already initialized
+    if (!myMap) {
+      initializeMap();
+    }
+
     // Display Fraud Density Map
     document.getElementById("map").style.display = "block"; // Show the map
     displayFraudDensityMap();
