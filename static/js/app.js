@@ -23,22 +23,18 @@ function displayFraudDensityMap() {
 
   // Load the JSON data using d3
   d3.json(fraudAddressURL).then(function(data) {
-    console.log(data); // Log the data to the console
+    console.log(Object.keys(data))
+    let latObj = data.lat;
+    let longObj = data.long; 
 
-    data.forEach(function(d) {
-      var marker = L.marker([d.lat, d.lng]);
-      console.log([lat, lng])
-      if (!isNaN(d.lat) && !isNaN(d.lng)) {
-        // Create a marker for each data point
-        let marker = L.marker([d.lat, d.lng]);
-      
-        // Add the marker to the marker cluster group
-        markers.addLayer(marker);
-      }
-    });
+    console.log(latObj)
+    console.log(longObj)
 
-    // Add the marker cluster group to the map
-    map.addLayer(markers);
+    for (let i = 0; i < 500000; i++) {
+      let marker = L.marker([latObj[i], longObj[i]])
+      markers.addLayer(marker)
+    }
+    myMap.addLayer(markers);
   }).catch(error => console.log("Error loading JSON data:", error));
 }
 
