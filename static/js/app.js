@@ -118,20 +118,18 @@ function displayPieChart(){
 function displayGenderChart(){
 let fraudPersonalURL = '/api/fraud_personal';
 
-  // Load the JSON data using d3
-  d3.json(fraudPersonalURL).then(function(data) {
-  // Get the canvas element
-  const ctx = document.getElementById('genderChart').getContext('2d');
-  // Fetch the CSV file
-  fetch('Fraud_Personal.csv')
-    .then(response => response.text())
-    .then(csvData => {
+  // Fetch the data from the API endpoint
+  fetch(fraudPersonalURL)
+    .then(response => response.json()) //Parse the repsonse to Json
+    .then(apiData => {
       // Parse the CSV data using Papa Parse
-      const parsedData = Papa.parse(csvData, { header: true }).data;
+      const ctx = document.getElementById('genderChart').getContext('2d');
+
       // Extract male and female data
       let maleCount = 0;
       let femaleCount = 0;
-      parsedData.forEach(row => {
+
+      apiData.forEach(row => {
         if (row.gender === 'M') {
           maleCount++;
         } else if (row.gender === 'F') {
@@ -162,8 +160,8 @@ let fraudPersonalURL = '/api/fraud_personal';
         }
       });
     })
-    .catch(error => console.error('Error fetching CSV file:', error));
-})};
+    .catch(error => console.error('Error fetching API data:', error));
+}
 
 // Function to handle dropdown menu selection change event
 function optionChanged(selectedOption) {
@@ -180,6 +178,10 @@ function optionChanged(selectedOption) {
     document.getElementById("map").style.display="none"; //Hide the map
     document.getElementById("chart-container").style.display = "block"; //Show the chart
     displayPieChart();
+  } else if (selectedOption === "option3") {
+    document.getElementById("map").style.display="none"; //Hide the map
+    document.getElementById("chart-container").style.display = "none"; //Show the chart
+    displayGenderChart();
   } else {
     // Hide the map for other options
     document.getElementById("map").style.display = "none";
