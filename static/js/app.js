@@ -20,25 +20,18 @@ function initializeMap() {
 function displayFraudDensityMap() {
   // Define the JSON URL
   let fraudAddressURL = '/api/fraud_address';
-
   // Load the JSON data using d3
   d3.json(fraudAddressURL).then(function(data) {
-    console.log(data); // Log the data to the console
-
-    data.forEach(function(d) {
-      var marker = L.marker([d.lat, d.lng]);
-      console.log([lat, lng])
-      if (!isNaN(d.lat) && !isNaN(d.lng)) {
-        // Create a marker for each data point
-        let marker = L.marker([d.lat, d.lng]);
-      
-        // Add the marker to the marker cluster group
-        markers.addLayer(marker);
-      }
-    });
-
-    // Add the marker cluster group to the map
-    map.addLayer(markers);
+    console.log(Object.keys(data))
+    let latObj = data.lat;
+    let longObj = data.long;
+    console.log(latObj)
+    console.log(longObj)
+    for (let i = 0; i < 500000; i++) {
+      let marker = L.marker([latObj[i], longObj[i]])
+      markers.addLayer(marker)
+    }
+    myMap.addLayer(markers);
   }).catch(error => console.log("Error loading JSON data:", error));
 }
 
