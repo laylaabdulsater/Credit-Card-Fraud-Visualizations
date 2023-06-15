@@ -22,8 +22,8 @@ def api_fraud_personal():
     output_data = df.to_dict()
     return jsonify(output_data)
    
-@app.route("/api/Fraud_Merch")
-def api_Fraud_Merch():
+@app.route("/api/fraud_merch")
+def api_fraud_merch():
 
     df = pd.read_csv('Fraud_Merch.csv')
     output_data = df.to_dict()
