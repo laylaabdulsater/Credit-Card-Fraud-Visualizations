@@ -185,6 +185,6 @@ function optionChanged(selectedOption) {
   } else {
     // Hide the map for other options
     document.getElementById("map").style.display = "none";
-    document.getElementById("chart-container").style.display = "none"; 
+    document.getElementById("genderChart").style.display = "block"; 
   }
 }
