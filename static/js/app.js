@@ -25,13 +25,12 @@ function displayFraudDensityMap() {
   d3.json(fraudAddressURL).then(function(data) {
     console.log(data); // Log the data to the console
 
-    Object.keys(data).forEach(key => {
-      let lat = parseFloat(data[key]['lat']);
-      let lng = parseFloat(data[key]['long']);
-
-      if (!isNaN(lat) && !isNaN(lng)) {
+    data.forEach(function(d) {
+      var marker = L.marker([d.lat, d.lng]);
+      console.log([lat, lng])
+      if (!isNaN(d.lat) && !isNaN(d.lng)) {
         // Create a marker for each data point
-        let marker = L.marker([lat, lng]);
+        let marker = L.marker([d.lat, d.lng]);
       
         // Add the marker to the marker cluster group
         markers.addLayer(marker);
@@ -39,7 +38,7 @@ function displayFraudDensityMap() {
     });
 
     // Add the marker cluster group to the map
-    myMap.addLayer(markers);
+    map.addLayer(markers);
   }).catch(error => console.log("Error loading JSON data:", error));
 }
 
@@ -76,3 +75,4 @@ function optionChanged(selectedOption) {
     document.getElementById("map").style.display = "none";
   }
 }
+
